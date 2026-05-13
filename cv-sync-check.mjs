@@ -74,6 +74,14 @@ if (!existsSync(profilePath)) {
       warnings.push(`config/profile.yml missing field: ${field}`);
     }
   }
+
+  // Soft preferences — recommended but not required. AI uses for awareness.
+  const recommendedFields = ['preferences', 'post_degree_path', 'free_notes'];
+  for (const field of recommendedFields) {
+    if (!profileContent.includes(field)) {
+      warnings.push(`config/profile.yml missing recommended soft preference: ${field} — AI works better with it but it is not required.`);
+    }
+  }
   if (profileContent.includes('"Jane Smith"')) {
     warnings.push('config/profile.yml still contains example data (Jane Smith). Update with your real details.');
   }

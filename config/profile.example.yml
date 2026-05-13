@@ -73,6 +73,62 @@ target:
   intake_seasons: []
   intake_strict: false
 
+# ── Soft preferences (AI awareness, NOT filters) ────────────────────
+# These are context the AI uses when scoring, framing recommendations, and
+# writing SoP/outreach. They are NEVER used to hard-drop programs. The AI
+# reasons with them — e.g., "your target app fee is $200 but this is $400;
+# however the program funds full tuition + stipend, so the fee is a one-time
+# acceptable cost." Edit to teach the system about your priorities.
+
+preferences:
+  # Application fee target (informational). AI weighs the fee against funding +
+  # admission likelihood. If user's target is $200 but program charges $400
+  # with a generous scholarship, AI may still recommend applying.
+  application_fee:
+    target_amount: 200
+    currency: "USD"
+    notes: "Higher fees acceptable if program funds tuition+stipend or has fee-waiver path."
+
+  # Funding preference (informational). Influences ranking in /uni-ops programs
+  # comparisons + SoP framing emphasis. NOT a hard filter — even fully self-pay
+  # programs are evaluated if score is high.
+  scholarship:
+    importance: "strong"          # none | nice_to_have | preferred | strong | required-but-soft
+    notes: "Open to programs without bundled funding IF external scholarships are realistic for my citizenship."
+
+  # GRE / GMAT preference (informational). Some programs waive; some require.
+  # AI uses to recommend test-prep priorities and to flag which programs would
+  # save the user a test cycle.
+  standardized_tests:
+    take_gre: "if_required"       # already_taken | if_required | avoid | retake_for_better_score
+    take_gmat: "avoid"
+    notes: "I'd rather skip GRE if possible. If 3+ top programs require it, I'll take it."
+
+  # Cohort / community signals (informational). Used in /uni-ops deep + Block C.
+  cohort:
+    diversity_priority: "medium"  # low | medium | high
+    international_student_share_min: 0.20
+    notes: "Want at least 20% international classmates for cultural fit."
+
+  # Application volume cap (informational soft target). AI uses to recommend
+  # prioritization when many high-fit programs exist.
+  application_volume:
+    target_count: 10
+    notes: "Aim for ~10 quality apps, not 30 mediocre ones."
+
+  # Career-after-degree intent (informational). Drives SoP closing paragraph,
+  # interview-prep emphasis, and patterns analysis.
+  post_degree_path:
+    primary: "industry_research"  # phd | industry_research | industry_product | startup | academia
+    notes: "Industry ML role at a CV-focused company, with option to return for PhD in 2-3 years."
+
+  # Open-ended notes: anything else the AI should know about your priorities,
+  # constraints, or non-negotiables that doesn't fit a structured field.
+  free_notes: |
+    - Strong preference for programs with active CV labs (PIs publishing at CVPR/ICCV/ECCV in last 2 years).
+    - Family constraint: must visit Istanbul ~2x/year (avoid Australia/NZ unless funded flights).
+    - Health insurance must be covered by scholarship or be < €100/month.
+
 academic:
   current_status: "Graduated"        # Graduated | Final-year undergraduate | Currently enrolled
   university: "Your Undergrad University"

@@ -150,6 +150,40 @@ The user sets hard preferences in `config/profile.yml`. Each filter has a `*_str
 - If `ranking_source` is `THE` → Times Higher Education subject; `ARWU` → Shanghai Ranking.
 - Rank "unranked" → treat as `rank = 9999`; do not drop unless `ranking_strict: true`.
 
+## Soft Preferences (NOT filters)
+
+`config/profile.yml.preferences` holds soft signals the AI uses as context but **NEVER as auto-drop criteria**. Distinct from `target.*` hard filters above.
+
+Read at session start. Apply in three places:
+
+1. **Recommendations and prose**, not pipeline cuts:
+   - Mention the trade-off when relevant ("App fee is $400 vs your $200 target — but the program funds tuition + €1500/mo stipend, so net-positive").
+   - Never write "FILTERED OUT due to preference X". Preferences inform reasoning; they don't drop programs.
+
+2. **`/uni-ops programs` comparison ordering**:
+   - When two programs tie on score, tiebreak using preference alignment (closer to `application_fee.target_amount`, stronger `scholarship.importance` match, GRE-waived if `take_gre: avoid`, etc.).
+   - Surface the tiebreak rationale in one line.
+
+3. **SoP / motivation / outreach framing**:
+   - `post_degree_path.primary` drives the closing paragraph of every SoP.
+   - `cohort.diversity_priority` and `international_student_share_min` shape the "fit" paragraph for diverse cohorts.
+   - `scholarship.importance` shapes how Block E mentions financial aid in the apply strategy.
+
+**Preference fields (read but not enforced):**
+
+| Field | What AI does |
+|-------|--------------|
+| `application_fee.target_amount` | Mention deviation in Block F notes. NEVER drop. |
+| `scholarship.importance` | Weight scholarship-bundled programs higher in comparisons. Note in Block D narrative. |
+| `standardized_tests.take_gre` | Flag GRE-required programs as "extra effort"; flag GRE-waived as "saves a test cycle". |
+| `standardized_tests.take_gmat` | Same logic for MBA-style programs. |
+| `cohort.diversity_priority` + `international_student_share_min` | Use in `/uni-ops deep` to surface intl-student %. Flag in Block C if program is < threshold. |
+| `application_volume.target_count` | When user has many high-fit programs, recommend top N by composite (score + preference fit) and label others as "tier 2 if time permits". |
+| `post_degree_path.primary` | Drive SoP closing + interview-prep emphasis + `/uni-ops project` evaluation. |
+| `free_notes` | Always parse. Treat each bullet as a personal constraint; reference in Block E when relevant. |
+
+**RULE:** Preferences inform but never gate. If a user wants a hard cap, they move the field from `preferences` to `target` (and define a `*_strict` companion).
+
 ## Global Rules
 
 ### NEVER

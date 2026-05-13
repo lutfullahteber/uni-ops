@@ -94,6 +94,12 @@ Output:
 
 ## Block F — Application strategy
 
+**Soft-preference awareness** (from `profile.yml.preferences` — never used to drop, only to inform):
+- Application fee: compare against `preferences.application_fee.target_amount`. If higher, note the delta + give an honest cost/value line (e.g., "$400 fee vs your $200 target — funded program with €1500/mo stipend, fee is one-time, net-positive").
+- GRE/GMAT: if `preferences.standardized_tests.take_gre: avoid` and program requires GRE, flag the effort cost. If `take_gre: if_required` and ≥2 already-targeted programs require it, note that taking GRE now unlocks more options.
+- Cohort: if `preferences.cohort.international_student_share_min` is set, show the program's intl-student % (from /uni-ops deep or WebSearch) and flag if under threshold.
+- `preferences.free_notes`: scan for any constraint that bears on this program (e.g., "must visit Istanbul 2x/year" + program in remote Australia) and surface in the narrative.
+
 - Documents required (CV, SoP, motivation letter, transcript, test scores, rec letters × N, portfolio, financial documents).
 - Number of recommenders required → cross-check `recommenders.yml`. If `recommenders.confirmed < required`, surface as a blocker.
 - Supplementary materials (writing sample, research statement, video, portfolio link).

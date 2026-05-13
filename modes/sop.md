@@ -52,7 +52,16 @@ If the user has industry experience, deployed work, OSS contributions, or extrac
 The Block E entry in the program report already lists named faculty and the Block C alignment notes. Reuse them here.
 
 ### Paragraph 5 — Forward-looking commitment (≈ 80–120 words)
-What the user will pursue at this program (research direction, capstone topic, internship targets), and the 5-year arc afterwards (PhD / industry / specific role). One sentence on what they bring back / contribute. Avoid "I will make the world a better place".
+What the user will pursue at this program (research direction, capstone topic, internship targets), and the 5-year arc afterwards.
+
+**Anchor the post-degree arc in `profile.yml.preferences.post_degree_path.primary`:**
+- `phd` → close with "Following the Master's, I plan to apply for a PhD in [area], building on the thesis work."
+- `industry_research` → close with named target industries / company types ("…to join an industry research lab working on [area]").
+- `industry_product` → close with applied-engineering ambition ("…ship CV-powered features to production at scale").
+- `startup` → close with venture / problem-finding stance.
+- `academia` → close with named long-term academic commitment (postdoc → tenure-track).
+
+One sentence on what they bring back / contribute. Avoid "I will make the world a better place".
 
 ## Style rules
 

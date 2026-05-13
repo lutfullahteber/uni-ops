@@ -170,6 +170,29 @@ If you have a portfolio (check `profile.yml.student.portfolio_url`), surface it 
 - Programs with optional extension (e.g., "1 year + 6 month thesis") — count the base + any default extension.
 - PhD with "fast track" option (3 years vs default 5) — note both, score against the user's stated preference.
 
+## Your Soft Preferences (AI awareness, not filters)
+
+<!-- These live in `config/profile.yml.preferences`. Unlike `target.*` filters,
+     these are NEVER used to auto-drop programs. They shape AI reasoning,
+     comparison tiebreaks, SoP framing, and outreach. -->
+
+| Preference | How AI uses it |
+|------------|----------------|
+| `application_fee.target_amount` | Mentioned in Block F notes when fee exceeds target. Never drops the program. |
+| `scholarship.importance` | Tiebreaks in `/uni-ops programs`; shapes Block D narrative; recommends external-scholarship matches more aggressively for high-importance settings. |
+| `standardized_tests.take_gre` / `take_gmat` | Flags effort cost of test-required programs; flags GRE-waived programs as time-savers. |
+| `cohort.diversity_priority`, `international_student_share_min` | Used in `/uni-ops deep` to surface intl-student %. Flag in Block C if cohort thin. |
+| `application_volume.target_count` | When >N high-fit programs exist, recommends top N + "tier 2 if time". |
+| `post_degree_path.primary` | Anchors SoP closing paragraph + interview-prep emphasis + project-mode evaluation. |
+| `free_notes` | Parsed as personal constraints. Referenced in Block E whenever relevant. |
+
+**Rule:** if you want a hard cap on a soft preference, MOVE the field from `preferences` to `target` and define a `*_strict` companion. Otherwise, the AI uses it as context only.
+
+**Edge cases:**
+- High fee + full funding: AI should explicitly do the math ("$400 fee + €1500/mo stipend × 24 months = net positive €35,600 vs your fee preference"). Do NOT suggest skipping.
+- "scholarship.importance: strong" + program with no funding: AI should aggressively search `scholarships.yml` AND WebSearch for external matches before scoring Block D. If no realistic external funding → recommend SKIP via reasoning (Block D), not by filter.
+- GRE-avoidance: when AI sees 3+ high-fit programs require GRE, raise this in `/uni-ops patterns` or in a /uni-ops programs tiebreak narrative ("worth taking GRE if you want any of these 3").
+
 ## Your Funding Strategy
 
 <!-- Adapt to YOUR situation. -->
