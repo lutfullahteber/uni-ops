@@ -1,0 +1,159 @@
+# Uni-Ops — Programs Configuration
+# Used by /uni-ops scan to discover relevant Bachelor/Master/PhD programs
+# and by evaluation modes to score program fit.
+#
+# HOW TO CUSTOMIZE:
+#   1. Copy this file to programs.yml in the project root
+#   2. Edit title_filter to match YOUR target degree level + fields
+#   3. Add/remove universities in tracked_programs
+#   4. Adjust search_queries for your preferred program aggregators
+#   5. Set enabled: false on programs you've decided against
+
+# -- Title filter --
+# At least 1 positive must match AND 0 negatives must match (case-insensitive).
+title_filter:
+  positive:
+    # Degree-level signals
+    - "Master"
+    - "M.Sc."
+    - "MSc"
+    - "MS in"
+    - "MEng"
+    # Field signals (CUSTOMIZE)
+    - "Computer Vision"
+    - "Machine Learning"
+    - "Artificial Intelligence"
+    - "Robotics"
+    - "Data Science"
+    - "Informatics"
+    - "Computer Science"
+
+  negative:
+    - "Executive MBA"
+    - "Part-time"
+    - "Online only"
+    - "Continuing Education"
+    - "Certificate"
+    - "Bootcamp"
+    - "Diploma"                  # exclude if you want degree only
+
+  level_filter: ["MSc", "Master", "MS", "M.Sc."]  # adjust to match target.degree_level
+
+# -- Search queries --
+# Used as WebSearch fallback when a program aggregator has no clean API.
+search_queries:
+  - name: "MastersPortal — CV/ML Europe"
+    query: 'site:mastersportal.com "Master" "Computer Vision" OR "Machine Learning" OR "AI"'
+    enabled: true
+
+  - name: "FindAMasters — CS/AI Europe"
+    query: 'site:findamasters.com "MSc" "Computer Science" OR "Artificial Intelligence"'
+    enabled: true
+
+  - name: "DAAD International Programs — Germany"
+    query: 'site:daad.de "Master" "Computer Science" OR "Computer Vision" OR "AI" English-taught'
+    enabled: true
+
+  - name: "Study in Holland — MSc CS/AI"
+    query: 'site:studyinholland.nl OR site:studyinnl.org "Master" "Computer Science" OR "AI"'
+    enabled: true
+
+  - name: "Erasmus Mundus Joint Masters — CV/ML"
+    query: '"Erasmus Mundus Joint Master" "computer vision" OR "machine learning" OR "data science"'
+    enabled: true
+
+# -- Tracked programs --
+# Concrete programs you want re-scanned on every `npm run scan`.
+# Numeric fields (tuition_per_year, est_living_cost_per_year) drive Block D
+# budget math in evaluation. Use the program's official currency in the
+# top-level field; scoring normalizes via candidate funding.currency.
+tracked_programs:
+
+  # -- Germany --
+  - name: "TU Munich — MSc Informatics"
+    program_url: "https://www.cit.tum.de/en/cit/studies/degree-programs/master-informatics/"
+    country: "Germany"
+    city: "Munich"
+    language_of_instruction: "English"
+    deadline: "2026-01-15"
+    tuition_per_year: 150            # EUR — public, semester contribution only
+    est_living_cost_per_year: 14000
+    currency: "EUR"
+    funding_bundled: false
+    application_fee: 75
+    duration_years: 2
+    required_test_scores:
+      toefl_ibt_min: 88
+      ielts_min: 6.5
+    gpa_min: 2.5                     # German 1.0=best; convert as needed
+    notes: "Top German CS school. Strong CV/robotics research."
+    enabled: true
+
+  - name: "RWTH Aachen — MSc Computer Science"
+    program_url: "https://www.rwth-aachen.de/cms/root/Studium/Vor-dem-Studium/Studiengaenge/Liste-Aktuelle-Studiengaenge/Studiengangbeschreibung/~bnpt/Computer-Science-M-Sc/"
+    country: "Germany"
+    city: "Aachen"
+    language_of_instruction: "English"
+    deadline: "2026-03-01"
+    tuition_per_year: 600
+    est_living_cost_per_year: 11000
+    currency: "EUR"
+    duration_years: 2
+    notes: "Strong AI / vision groups."
+    enabled: true
+
+  # -- Switzerland --
+  - name: "ETH Zurich — MSc Computer Science"
+    program_url: "https://ethz.ch/en/studies/master/degree-programmes/engineering-sciences/computer-science.html"
+    country: "Switzerland"
+    city: "Zurich"
+    language_of_instruction: "English"
+    deadline: "2025-12-15"
+    tuition_per_year: 1460
+    est_living_cost_per_year: 24000
+    currency: "CHF"
+    application_fee: 150
+    duration_years: 2
+    required_test_scores:
+      toefl_ibt_min: 100
+    notes: "Top global CS. Highly selective."
+    enabled: true
+
+  - name: "EPFL — MSc Computer Science"
+    program_url: "https://www.epfl.ch/education/master/programs/computer-science/"
+    country: "Switzerland"
+    city: "Lausanne"
+    language_of_instruction: "English"
+    deadline: "2026-04-15"
+    tuition_per_year: 1460
+    est_living_cost_per_year: 22000
+    currency: "CHF"
+    duration_years: 2
+    enabled: true
+
+  # -- Netherlands --
+  - name: "TU Delft — MSc Computer Science"
+    program_url: "https://www.tudelft.nl/en/education/programmes/masters/cs/msc-computer-science"
+    country: "Netherlands"
+    city: "Delft"
+    language_of_instruction: "English"
+    deadline: "2026-04-01"
+    tuition_per_year: 20000          # non-EU/EEA
+    est_living_cost_per_year: 14000
+    currency: "EUR"
+    duration_years: 2
+    enabled: true
+
+  # -- Japan --
+  - name: "University of Tokyo — MSc Information Science & Technology"
+    program_url: "https://www.i.u-tokyo.ac.jp/edu/course/index_e.shtml"
+    country: "Japan"
+    city: "Tokyo"
+    language_of_instruction: "English (some tracks)"
+    deadline: "2026-08-31"
+    tuition_per_year: 535800         # JPY (~3500 EUR)
+    est_living_cost_per_year: 1500000  # JPY (~9700 EUR)
+    currency: "JPY"
+    duration_years: 2
+    notes: "MEXT scholarship eligible. Apply via embassy track for funding."
+    enabled: true

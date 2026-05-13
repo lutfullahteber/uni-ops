@@ -1,0 +1,37 @@
+{
+  "name": "uni-ops",
+  "version": "0.1.0",
+  "description": "AI-powered university & scholarship application pipeline built on Claude Code",
+  "scripts": {
+    "doctor": "node doctor.mjs",
+    "verify": "node verify-pipeline.mjs",
+    "normalize": "node normalize-statuses.mjs",
+    "dedup": "node dedup-tracker.mjs",
+    "merge": "node merge-tracker.mjs",
+    "pdf": "node generate-pdf.mjs",
+    "sync-check": "node cv-sync-check.mjs",
+    "update:check": "node update-system.mjs check",
+    "update": "node update-system.mjs apply",
+    "rollback": "node update-system.mjs rollback",
+    "liveness": "node check-liveness.mjs",
+    "scan": "node scan.mjs",
+    "followup": "node followup-cadence.mjs",
+    "gemini:eval": "node gemini-eval.mjs"
+  },
+  "keywords": [
+    "ai",
+    "university",
+    "scholarship",
+    "admissions",
+    "claude-code",
+    "automation"
+  ],
+  "author": "Lutfullah Teber",
+  "license": "MIT",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "dotenv": "^16.4.5",
+    "js-yaml": "^4.1.1",
+    "playwright": "^1.58.1"
+  }
+}

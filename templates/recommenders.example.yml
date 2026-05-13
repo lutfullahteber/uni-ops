@@ -1,0 +1,70 @@
+# Uni-Ops — Recommenders Configuration
+# Copy this file to recommenders.yml in the project root.
+# Tracks referees, what they can speak to, and request/follow-up cadence.
+
+# Default cadence for recommender chasers (days between nudges)
+default_cadence_days: 14
+
+# Default lead time to ask before a deadline (days)
+default_lead_time_days: 45
+
+referees:
+  - name: "Prof. A. Yilmaz"
+    email: "a.yilmaz@example.edu"
+    title: "Associate Professor, Computer Engineering"
+    institution: "Your Undergrad University"
+    relationship: "Capstone advisor (Karate AI project)"
+    relationship_duration: "18 months"
+    strength: "Deep technical (CV/ML), project ownership, independent research"
+    relevant_for:
+      - "Research-track MSc programs"
+      - "PhD applications"
+      - "Computer Vision groups"
+    talking_points:
+      - "Karate Action Recognition capstone — 89.82% accuracy, end-to-end pipeline"
+      - "Independent debugging of YOLO pipeline; built own dataset of 10K images"
+      - "Reproduced and improved 3 SOTA papers during capstone"
+    asked_on: null                       # YYYY-MM-DD when you formally requested
+    confirmed: false                     # true after they agree to write
+    cadence_days: 14                     # days between nudges if unconfirmed/unsubmitted
+    submitted_count: 0
+    last_contacted: null
+    notes: "Prefers contact via institutional email. Slow response — 1-2 weeks normal."
+
+  - name: "Dr. B. Demir"
+    email: "b.demir@example.com"
+    title: "Senior ML Engineer"
+    institution: "ExampleAI"
+    relationship: "Internship supervisor (3 months)"
+    strength: "Industry impact, deployment under constraints, communication"
+    relevant_for:
+      - "Applied / professional Master programs"
+      - "Industry-funded MSc tracks"
+    talking_points:
+      - "Cut inference latency by 35% on edge device"
+      - "Owned model lifecycle: data labeling → training → A/B → rollout"
+    asked_on: null
+    confirmed: false
+    cadence_days: 14
+    submitted_count: 0
+    last_contacted: null
+    notes: ""
+
+  - name: "Prof. C. Kaya"
+    email: "c.kaya@example.edu"
+    title: "Professor, Mathematics"
+    institution: "Your Undergrad University"
+    relationship: "Linear Algebra + Optimization courses (top 3% in class)"
+    strength: "Theoretical foundations, mathematical maturity"
+    relevant_for:
+      - "Theory-heavy MSc / PhD programs"
+      - "ML theory groups"
+    talking_points:
+      - "Top of 180-student class in Optimization"
+      - "Office-hour engagement on convex analysis questions"
+    asked_on: null
+    confirmed: false
+    cadence_days: 14
+    submitted_count: 0
+    last_contacted: null
+    notes: ""

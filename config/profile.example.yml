@@ -1,0 +1,96 @@
+# Uni-Ops Profile Configuration
+# Copy this file to config/profile.yml and fill in your details.
+# This is the single source of truth for your personal data across all modes.
+
+student:
+  full_name: "Jane Smith"
+  email: "jane@example.com"
+  phone: "+90-555-0123"
+  current_location: "Istanbul, Turkey"
+  linkedin: "linkedin.com/in/janesmith"
+  portfolio_url: "https://janesmith.dev"
+  github: "github.com/janesmith"
+  orcid: ""                          # optional, for PhD applicants
+
+target:
+  degree_level: "Master"             # Bachelor | Master | PhD
+  fields:                            # ranked, primary first
+    - "Computer Vision"
+    - "Machine Learning"
+    - "AI / Robotics"
+  countries:                         # ranked
+    - "Germany"
+    - "Netherlands"
+    - "Switzerland"
+    - "Japan"
+  cities:
+    - "Munich"
+    - "Zurich"
+    - "Amsterdam"
+    - "Tokyo"
+  start_term: "Fall 2027"
+  funding_required: true             # true if you need scholarship/assistantship to attend
+
+academic:
+  current_status: "Graduated"        # Graduated | Final-year undergraduate | Currently enrolled
+  university: "Your Undergrad University"
+  major: "Computer Engineering"
+  graduation_date: "2025-06"
+  diploma_gpa: 3.42
+  gpa_scale: 4.0                     # 4.0 (US), 10.0 (NL/IT), 100 (TR), etc.
+  rank_in_class: "Top 15%"           # optional
+  test_scores:
+    toefl_ibt: 98                    # null if not taken
+    ielts: null
+    gre_general:
+      verbal: 156
+      quant: 165
+      awa: 4.0
+    gmat: null
+    duolingo: null
+    other: {}                        # e.g. { GATE: 720 }
+
+narrative:
+  headline: "Computer vision engineer transitioning into research-track Master's."
+  research_interest: |
+    Real-time human-pose estimation and action recognition for sports analytics,
+    with a focus on small-data / on-device inference.
+  superpowers:                       # 3-5 things that make you stand out
+    - "End-to-end CV pipelines (data → model → deployment)"
+    - "Independent project ownership with public artefacts"
+    - "Multilingual technical communication (TR/EN)"
+  proof_points:                      # projects, papers, awards with measurable outcomes
+    - name: "Karate Action Recognition (Capstone)"
+      url: "https://janesmith.dev/karate-ai"
+      hero_metric: "89.82% accuracy on 12-class action set"
+    - name: "Open-Source YOLO Wrapper"
+      url: "https://github.com/janesmith/yolo-wrap"
+      hero_metric: "1.2K GitHub stars"
+
+extracurriculars_summary: |
+  Lead one-line summary of your community/social/leadership profile.
+  Full record lives in extracurriculars.md.
+
+funding:
+  currency: "EUR"
+  tuition_budget_max: 20000          # max tuition per year you can pay out-of-pocket (after scholarships)
+  living_budget_max: 12000           # max living cost per year self-funded
+  total_annual_cap: 32000            # absolute net-cost ceiling per year
+  needs: "Full tuition + living"     # narrative for SoP
+  acceptable_min: "Tuition waiver only"
+  citizenship: "Turkish"
+  eligible_programs: ["Erasmus Mundus", "DAAD", "MEXT", "Fulbright"]
+  # Optional: per-country budget overrides (highest precedence in Block D scoring)
+  # by_country:
+  #   Germany:    { tuition_budget_max: 1500, living_budget_max: 12000 }   # public unis essentially free
+  #   USA:        { tuition_budget_max: 40000, living_budget_max: 20000 }
+  #   UK:         { tuition_budget_max: 25000, living_budget_max: 15000 }
+  #   Switzerland: { tuition_budget_max: 2000, living_budget_max: 24000 }
+
+cv:
+  output_format: "html"              # "html" only in v0.1.0
+  # canva_resume_design_id: "DAxxxxxxxxx"
+
+documents:
+  # Which application documents to generate per program by default
+  generate: ["cv", "sop"]            # add "motivation" in Phase 2

@@ -1,0 +1,139 @@
+# Uni-Ops — Canonical States
+# Source of truth for tracker writers and readers.
+#
+# Rule: the status field in data/applications.md, data/scholarships.md, and
+# data/recommenders.md must contain EXACTLY one of these labels (case-insensitive).
+# No markdown bold, no dates, no extra text. Dates go in date columns.
+
+# Programs / admissions (data/applications.md)
+applications:
+  - id: drafting
+    label: Drafting
+    aliases: [draft, in-progress, wip]
+    description: SoP / materials being prepared, not yet submitted
+    dashboard_group: drafting
+
+  - id: submitted
+    label: Submitted
+    aliases: [applied, sent]
+    description: Application submitted, waiting on the school's first response
+    dashboard_group: submitted
+
+  - id: awaiting_decision
+    label: Awaiting Decision
+    aliases: [under-review, in-review]
+    description: School acknowledged receipt; reviewing
+    dashboard_group: pending
+
+  - id: interview
+    label: Interview
+    aliases: [interview-invited, interviewing]
+    description: Admission interview scheduled or in progress
+    dashboard_group: interview
+
+  - id: admitted
+    label: Admitted
+    aliases: [accepted, offer]
+    description: Admission offer received
+    dashboard_group: admitted
+
+  - id: waitlisted
+    label: Waitlisted
+    aliases: [waitlist]
+    description: On the waitlist
+    dashboard_group: waitlisted
+
+  - id: rejected
+    label: Rejected
+    aliases: [denied]
+    description: Rejected by the school
+    dashboard_group: rejected
+
+  - id: withdrawn
+    label: Withdrawn
+    aliases: [withdrew]
+    description: Withdrew the application
+    dashboard_group: withdrawn
+
+  - id: skip
+    label: SKIP
+    aliases: [no-fit, monitor, skip]
+    description: Identified but decided not to apply
+    dashboard_group: skip
+
+# Scholarships (data/scholarships.md)
+scholarships:
+  - id: identified
+    label: Identified
+    aliases: [scanned, found]
+    description: Scholarship discovered; eligibility not yet checked
+    dashboard_group: identified
+
+  - id: drafting
+    label: Drafting
+    aliases: [draft, wip]
+    description: Materials being prepared
+    dashboard_group: drafting
+
+  - id: submitted
+    label: Submitted
+    aliases: [applied, sent]
+    description: Application submitted
+    dashboard_group: submitted
+
+  - id: awaiting_decision
+    label: Awaiting Decision
+    aliases: [under-review]
+    description: Under review by funding body
+    dashboard_group: pending
+
+  - id: interview
+    label: Interview
+    aliases: [panel]
+    description: Selection interview / panel scheduled
+    dashboard_group: interview
+
+  - id: awarded
+    label: Awarded
+    aliases: [won, granted]
+    description: Scholarship granted
+    dashboard_group: awarded
+
+  - id: rejected
+    label: Rejected
+    aliases: [denied]
+    description: Rejected by funding body
+    dashboard_group: rejected
+
+  - id: withdrawn
+    label: Withdrawn
+    aliases: [withdrew]
+    description: Withdrew the application
+    dashboard_group: withdrawn
+
+  - id: skip
+    label: SKIP
+    aliases: [ineligible, no-fit]
+    description: Not eligible or chose not to apply
+    dashboard_group: skip
+
+# Recommenders (data/recommenders.md)
+recommenders:
+  - id: identified
+    label: Identified
+    description: Listed in recommenders.yml; not yet asked
+  - id: asked
+    label: Asked
+    description: Formally requested; awaiting confirmation
+  - id: confirmed
+    label: Confirmed
+    description: Referee agreed to write
+  - id: drafting
+    label: Drafting
+    description: Referee preparing the letter
+  - id: submitted
+    label: Submitted
+    description: Letter submitted (for at least one program)
+  - id: declined
+    label: Declined
+    description: Referee declined to write
