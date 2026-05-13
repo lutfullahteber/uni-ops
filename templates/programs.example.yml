@@ -39,6 +39,10 @@ title_filter:
 
   level_filter: ["MSc", "Master", "MS", "M.Sc."]  # adjust to match target.degree_level
 
+# Duration filter is sourced from config/profile.yml.target.duration_years_min / _max.
+# Per-program `duration_years` below feeds Block A + scan-time filtering.
+# Set profile.yml `duration_strict: true` to hard-drop out-of-range programs in scan.
+
 # -- Search queries --
 # Used as WebSearch fallback when a program aggregator has no clean API.
 search_queries:

@@ -60,6 +60,21 @@ Frame profile as **"X with proof"** — e.g. "Builder with public artefacts" or 
 
 If you have a portfolio (check `profile.yml.student.portfolio_url`), surface it in CV header and SoP closing.
 
+## Your Duration Preference
+
+<!-- Most candidates have strong opinions on program length. Examples:
+     - "Only 1-year MSc — I need to start working fast."
+     - "Want 2-year research-track for thesis depth."
+     - "4-year PhD only, not 5+."
+     Edit your stance below. -->
+
+**Default rule (from `config/profile.yml`):** accept programs between `duration_years_min` and `duration_years_max`. `duration_strict: true` means scan drops out-of-range; `false` keeps them but Block A flags.
+
+**Edge cases to handle:**
+- Programs that span 1.5 years (3 semesters) — round up to 2 for filter purposes.
+- Programs with optional extension (e.g., "1 year + 6 month thesis") — count the base + any default extension.
+- PhD with "fast track" option (3 years vs default 5) — note both, score against the user's stated preference.
+
 ## Your Funding Strategy
 
 <!-- Adapt to YOUR situation. -->

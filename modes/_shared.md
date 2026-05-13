@@ -121,6 +121,24 @@ Classify every program listing into one of these types (or a hybrid of 2):
 
 After detecting archetype, read `modes/_profile.md` for the user's specific framing and proof-point selection for that archetype.
 
+## Program duration filter
+
+The user sets acceptable program length in `config/profile.yml`:
+
+```yaml
+target:
+  duration_years_min: 1
+  duration_years_max: 2
+  duration_strict: true   # true = drop in scan, false = penalize Block A/F
+```
+
+Every program evaluation MUST:
+1. Read `duration_years` from `programs.yml` if available, else scrape from the program page (look for "X-year", "X semesters", "60 ECTS/year", "credit hours").
+2. Compare against `target.duration_years_min` / `_max`.
+3. If outside and `duration_strict: true` → final recommendation = SKIP regardless of other scores. Block A flags `[OUT OF RANGE]`.
+4. If outside and `duration_strict: false` → keep evaluating, flag Block A, cap Block F at 3.
+5. If duration is unknown/unparseable → mark `duration_unknown` in the report; treat as soft-pass.
+
 ## Global Rules
 
 ### NEVER

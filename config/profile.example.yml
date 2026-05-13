@@ -31,6 +31,15 @@ target:
   start_term: "Fall 2027"
   funding_required: true             # true if you need scholarship/assistantship to attend
 
+  # Program duration filter (years). Programs outside this range get filtered
+  # by scan and flagged in Block A. Useful when you want only 1-year MSc, or
+  # want to exclude long PhDs (5+ years).
+  duration_years_min: 1              # accept programs with duration >= this
+  duration_years_max: 2              # accept programs with duration <= this
+  # If true, scan hard-drops programs outside [min, max].
+  # If false, scan keeps them but Block A flags + reduces Block F score.
+  duration_strict: true
+
 academic:
   current_status: "Graduated"        # Graduated | Final-year undergraduate | Currently enrolled
   university: "Your Undergrad University"

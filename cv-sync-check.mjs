@@ -59,7 +59,7 @@ if (!existsSync(profilePath)) {
   errors.push('config/profile.yml not found. Copy from config/profile.example.yml and fill in your details.');
 } else {
   const profileContent = readFileSync(profilePath, 'utf-8');
-  const requiredFields = ['full_name', 'email', 'degree_level', 'tuition_budget_max', 'total_annual_cap'];
+  const requiredFields = ['full_name', 'email', 'degree_level', 'duration_years_min', 'duration_years_max', 'tuition_budget_max', 'total_annual_cap'];
   for (const field of requiredFields) {
     if (!profileContent.includes(field)) {
       warnings.push(`config/profile.yml missing field: ${field}`);

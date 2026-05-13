@@ -16,11 +16,13 @@ Table with:
 - Degree level (Bachelor / Master / PhD)
 - Country + city
 - Language of instruction
-- Duration (years / months)
+- **Duration (years / months)** — flag `[OUT OF RANGE]` if outside `target.duration_years_min`–`target.duration_years_max` from `profile.yml`
 - Deadline (and rolling-vs-fixed)
 - Apply portal URL
 - Archetype detected
 - TL;DR in 1 sentence
+
+If duration is outside the user's target range AND `target.duration_strict: true` → recommend SKIP in the final score regardless of other blocks. If `duration_strict: false` → keep evaluating but cap Block F at 3.
 
 ## Block B — Academic match
 

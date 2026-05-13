@@ -68,6 +68,11 @@ WebSearch results can be stale by months — every Level-3 URL must be verified 
    - 0 `negative` keywords present
    - `level_filter` keyword present (e.g., "Master", "M.Sc.", "MSc") if defined
 8. **Filter by `target.countries`** — drop hits outside the student's country list (unless explicitly cross-country / joint program).
+8b. **Filter by `target.duration_years_min` / `target.duration_years_max`** (from `config/profile.yml`):
+   - For tracked_programs (Level 1): use the `duration_years` field in `programs.yml`. If missing, Playwright-scrape the program page for duration (look for "X-year", "X semesters", "ECTS / 60 per year").
+   - For aggregator/WebSearch hits (Levels 2/3): extract duration from the listing card or program page. If unparseable, keep the entry but tag `duration_unknown` in `scan-history.tsv` for manual review.
+   - If `target.duration_strict: true` → drop programs outside `[duration_years_min, duration_years_max]`.
+   - If `target.duration_strict: false` → keep but mark `notes=duration_outside_range:{years}` so Block A in later evaluation can flag and Block F can penalize.
 9. **Dedup** against 3 sources:
    - `scan-history.tsv` (exact URL seen)
    - `applications.md` (university + program already evaluated)
