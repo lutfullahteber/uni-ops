@@ -15,14 +15,22 @@ Table with:
 - University + program name
 - Degree level (Bachelor / Master / PhD)
 - Country + city
-- Language of instruction
-- **Duration (years / months)** — flag `[OUT OF RANGE]` if outside `target.duration_years_min`–`target.duration_years_max` from `profile.yml`
+- **Language of instruction** — flag `[LANG MISMATCH]` if no overlap with `target.languages_of_instruction`
+- **Institution type** (public / private) — flag `[INSTITUTION MISMATCH]` if mismatch with `target.institution_type` (skip flag if value is "any")
+- **Ranking** — show as `{source} #{rank}`; flag `[RANK > {max}]` if rank exceeds `target.ranking_max`
+- **Duration (years / months)** — flag `[DURATION OUT OF RANGE]` if outside `target.duration_years_min`–`_max`
+- **Thesis policy** (required / optional / no_thesis) — flag `[THESIS MISMATCH]` if mismatch with `target.thesis`
+- **Intake seasons** — flag if user's `target.intake_seasons` non-empty and no overlap (next acceptable intake noted)
 - Deadline (and rolling-vs-fixed)
 - Apply portal URL
 - Archetype detected
 - TL;DR in 1 sentence
 
-If duration is outside the user's target range AND `target.duration_strict: true` → recommend SKIP in the final score regardless of other blocks. If `duration_strict: false` → keep evaluating but cap Block F at 3.
+**Hard-block rule:** if ANY filter mismatches AND its `*_strict` is true → final recommendation = SKIP regardless of other block scores. Note the strict filter that triggered SKIP.
+
+**Soft-block rule (`*_strict: false`):** keep evaluating with the per-filter Block impact from `_shared.md`. Flag `[FILTER MISMATCH]` in Block A header.
+
+**Unknown values:** if a filter value can't be determined (page doesn't surface it, scrape fails) → tag `{filter}_unknown` in the report and treat as soft-pass. Do NOT auto-SKIP on unknowns.
 
 ## Block B — Academic match
 

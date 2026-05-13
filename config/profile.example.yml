@@ -31,14 +31,47 @@ target:
   start_term: "Fall 2027"
   funding_required: true             # true if you need scholarship/assistantship to attend
 
-  # Program duration filter (years). Programs outside this range get filtered
-  # by scan and flagged in Block A. Useful when you want only 1-year MSc, or
-  # want to exclude long PhDs (5+ years).
-  duration_years_min: 1              # accept programs with duration >= this
-  duration_years_max: 2              # accept programs with duration <= this
-  # If true, scan hard-drops programs outside [min, max].
-  # If false, scan keeps them but Block A flags + reduces Block F score.
+  # ── Filters (drive scan.md filtering + program.md Block A flags) ──
+  # Set *_strict: true to hard-drop in scan; false to keep but flag in Block A
+  # and cap Block F at 3.
+
+  # Program duration (years). Useful: only 1-year MSc, or no 5+-year PhD.
+  duration_years_min: 1
+  duration_years_max: 2
   duration_strict: true
+
+  # Language of instruction (case-insensitive substring match against program page).
+  # Default: only fully English-taught. Add "German", "French", "Japanese" etc. as needed.
+  languages_of_instruction:
+    - "English"
+  language_strict: true
+
+  # Public / private filter. Values: "public", "private", "any".
+  # Hard-drop other type when strict. Set "any" to skip the filter entirely.
+  institution_type: "public"
+  institution_type_strict: false     # most public-affordable students still want
+                                     # to evaluate strong private offers (ETH, etc.)
+
+  # University ranking ceiling. Source defaults to QS World University Rankings.
+  # Use the rank in the relevant subject (e.g., "QS Computer Science") via
+  # WebSearch in scan/eval. Set 9999 to disable.
+  ranking_source: "QS Subject"       # "QS World" | "QS Subject" | "THE" | "ARWU"
+  ranking_max: 200                   # accept programs at universities ranked <= this
+  ranking_strict: false              # false: penalize Block C but keep in pipeline
+
+  # Thesis policy.
+  # Values:
+  #   "required"  -- program must include a thesis component
+  #   "optional"  -- program must offer thesis as an option
+  #   "no_thesis" -- prefer pure-coursework, drop thesis-mandatory programs
+  #   "either"    -- no preference
+  thesis: "required"
+  thesis_strict: false               # false: penalize Block F by 1 if mismatch
+
+  # Intake seasons (optional). Empty list = accept any intake.
+  # Examples: ["Fall"], ["Spring"], ["Fall", "Spring"].
+  intake_seasons: []
+  intake_strict: false
 
 academic:
   current_status: "Graduated"        # Graduated | Final-year undergraduate | Currently enrolled

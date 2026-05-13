@@ -121,23 +121,34 @@ Classify every program listing into one of these types (or a hybrid of 2):
 
 After detecting archetype, read `modes/_profile.md` for the user's specific framing and proof-point selection for that archetype.
 
-## Program duration filter
+## Program filters (driven by `config/profile.yml.target`)
 
-The user sets acceptable program length in `config/profile.yml`:
+The user sets hard preferences in `config/profile.yml`. Each filter has a `*_strict` companion:
+- `true` → scan hard-drops out-of-range entries
+- `false` → keep, flag Block A, penalize relevant blocks
 
-```yaml
-target:
-  duration_years_min: 1
-  duration_years_max: 2
-  duration_strict: true   # true = drop in scan, false = penalize Block A/F
-```
+| Filter | profile.yml field | Where it's read per program | Block impact when soft-fail |
+|--------|-------------------|----------------------------|------------------------------|
+| Duration | `duration_years_min/_max` + `duration_strict` | `programs.yml.duration_years` or scraped | Block A flag `[OUT OF RANGE]`; Block F cap 3 |
+| Language | `languages_of_instruction` + `language_strict` | `programs.yml.language_of_instruction` or scraped | Block A flag; if user can't follow lectures → SKIP |
+| Institution type | `institution_type` (`public`/`private`/`any`) + `institution_type_strict` | `programs.yml.institution_type` or WebSearch | Block A flag |
+| Ranking | `ranking_max` + `ranking_source` + `ranking_strict` | `programs.yml.ranking.rank` matched to `ranking_source`, else WebSearch | Block C −1 per 50 ranks over `ranking_max` |
+| Thesis | `thesis` (`required`/`optional`/`no_thesis`/`either`) + `thesis_strict` | `programs.yml.thesis` or scraped | Block F −1 |
+| Intake season | `intake_seasons` (list) + `intake_strict` | `programs.yml.intake_seasons` or scraped | Block A note next acceptable intake |
 
-Every program evaluation MUST:
-1. Read `duration_years` from `programs.yml` if available, else scrape from the program page (look for "X-year", "X semesters", "60 ECTS/year", "credit hours").
-2. Compare against `target.duration_years_min` / `_max`.
-3. If outside and `duration_strict: true` → final recommendation = SKIP regardless of other scores. Block A flags `[OUT OF RANGE]`.
-4. If outside and `duration_strict: false` → keep evaluating, flag Block A, cap Block F at 3.
-5. If duration is unknown/unparseable → mark `duration_unknown` in the report; treat as soft-pass.
+**Evaluation rules (program.md Block A):**
+1. Read each filter's per-program value (yaml or scrape).
+2. Compare against user target.
+3. Mismatch + strict=true → final recommendation = SKIP regardless of other blocks.
+4. Mismatch + strict=false → apply Block impact above + flag `[FILTER MISMATCH]` in Block A.
+5. Unknown/unparseable value → tag `*_unknown` in report; treat as soft-pass (do not drop).
+
+**Ranking specifics:**
+- Default source: `QS Subject` (subject-specific ranking, more meaningful than `QS World`).
+- For computer science programs, prefer `QS World University Rankings by Subject — Computer Science & Information Systems`.
+- For business/MBA, prefer `Financial Times Global MBA` or `QS Business Masters`.
+- If `ranking_source` is `THE` → Times Higher Education subject; `ARWU` → Shanghai Ranking.
+- Rank "unranked" → treat as `rank = 9999`; do not drop unless `ranking_strict: true`.
 
 ## Global Rules
 

@@ -70,9 +70,43 @@ WebSearch results can be stale by months — every Level-3 URL must be verified 
 8. **Filter by `target.countries`** — drop hits outside the student's country list (unless explicitly cross-country / joint program).
 8b. **Filter by `target.duration_years_min` / `target.duration_years_max`** (from `config/profile.yml`):
    - For tracked_programs (Level 1): use the `duration_years` field in `programs.yml`. If missing, Playwright-scrape the program page for duration (look for "X-year", "X semesters", "ECTS / 60 per year").
-   - For aggregator/WebSearch hits (Levels 2/3): extract duration from the listing card or program page. If unparseable, keep the entry but tag `duration_unknown` in `scan-history.tsv` for manual review.
-   - If `target.duration_strict: true` → drop programs outside `[duration_years_min, duration_years_max]`.
-   - If `target.duration_strict: false` → keep but mark `notes=duration_outside_range:{years}` so Block A in later evaluation can flag and Block F can penalize.
+   - For aggregator/WebSearch hits (Levels 2/3): extract duration from the listing card or program page. If unparseable, keep the entry but tag `duration_unknown` in `scan-history.tsv`.
+   - If `target.duration_strict: true` → drop. Else → mark `notes=duration_outside_range:{years}`.
+
+8c. **Filter by `target.languages_of_instruction`** (case-insensitive substring match against the program page's "Language of instruction" or "Teaching language" field):
+   - Level 1: read `programs.yml.language_of_instruction` per program. Empty/unknown → Playwright-scrape.
+   - Levels 2/3: read from listing card; if missing, Playwright the program page.
+   - If `language_strict: true` and no overlap → drop with status `skipped_language`.
+   - Else → mark `notes=language:{found}` and continue.
+
+8d. **Filter by `target.institution_type`** ("public" / "private" / "any"):
+   - Skip filter if value is "any".
+   - Level 1: `programs.yml.institution_type` per program. If missing, WebSearch one query: `"{university}" public OR private university`.
+   - If `institution_type_strict: true` and mismatch → drop with status `skipped_institution_type`.
+   - Else → flag in Block A and continue.
+
+8e. **Filter by `target.ranking_max`** + `ranking_source`:
+   - Level 1: `programs.yml.ranking.rank` per program (matched against `ranking_source`). If missing, WebSearch one query: `"{university}" "{ranking_source}" computer science 2025`.
+   - Comparison: keep iff `rank <= ranking_max`.
+   - If `ranking_strict: true` and `rank > ranking_max` → drop with status `skipped_ranking`.
+   - Else → mark `notes=rank:{X}` and continue; Block C scoring will penalize.
+   - If rank cannot be determined after WebSearch → keep, tag `rank_unknown`.
+
+8f. **Filter by `target.thesis`** (`required` | `optional` | `no_thesis` | `either`):
+   - Skip filter if value is `either`.
+   - Level 1: `programs.yml.thesis` per program. If missing, Playwright-scrape the program page for keywords: "thesis", "Master's thesis", "research project", "capstone".
+   - Match rules:
+     - User `required` → program must have `thesis: required` (or `optional` if interpreted leniently). Drop pure-coursework programs.
+     - User `optional` → program must have `optional` OR `required`. Drop `no_thesis`.
+     - User `no_thesis` → drop `required`.
+   - If `thesis_strict: true` and mismatch → drop with `skipped_thesis`.
+   - Else → flag in Block F and continue.
+
+8g. **Filter by `target.intake_seasons`** (optional list — `["Fall"]`, `["Spring"]`, etc.):
+   - Skip filter if `intake_seasons` is empty.
+   - Level 1: `programs.yml.intake_seasons` per program. If missing, scrape page.
+   - If `intake_strict: true` and no overlap → drop with `skipped_intake`.
+   - Else → continue, note next acceptable intake in Block A.
 9. **Dedup** against 3 sources:
    - `scan-history.tsv` (exact URL seen)
    - `applications.md` (university + program already evaluated)
@@ -91,7 +125,7 @@ WebSearch results can be stale by months — every Level-3 URL must be verified 
 
 `data/scan-history.tsv` columns: `url`, `first_seen`, `source`, `title`, `university`, `country`, `status`.
 
-Status values: `added`, `skipped_title`, `skipped_country`, `skipped_dup`, `skipped_expired`, `skipped_error`.
+Status values: `added`, `skipped_title`, `skipped_country`, `skipped_duration`, `skipped_language`, `skipped_institution_type`, `skipped_ranking`, `skipped_thesis`, `skipped_intake`, `skipped_dup`, `skipped_expired`, `skipped_error`.
 
 ## Output summary
 

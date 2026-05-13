@@ -60,6 +60,101 @@ Frame profile as **"X with proof"** — e.g. "Builder with public artefacts" or 
 
 If you have a portfolio (check `profile.yml.student.portfolio_url`), surface it in CV header and SoP closing.
 
+## Your Language Policy
+
+<!-- Most students need English-taught programs. Some want or need additional languages.
+     Examples:
+     - "Only English. Don't show me German-only Master's even at strong unis."
+     - "English OR German — I have C1 Goethe-Zertifikat."
+     - "Japanese-taught OK only if program has English thesis option."
+     Edit your stance below. -->
+
+**Default (from `config/profile.yml.target.languages_of_instruction`):** accept any program whose page lists one of the user's listed languages as a teaching language (case-insensitive substring).
+
+**Edge cases:**
+- "English-taught" programs that have 1–2 German courses: still pass (majority-English).
+- "Mostly English, thesis in German": flag — depends on user's proficiency. Default to accept; SoP can address language plan.
+- "Bilingual program (EN/DE 50/50)": accept if either language is in user list.
+- Page says "language of instruction may vary": Playwright scrape the course catalogue to verify before scoring.
+
+## Your Institution-Type Policy
+
+<!-- Public vs private matters for cost (public ~free in DE/FR, private $$$ in US/UK)
+     and for prestige signaling (private US elites vs public top-ranked Europe).
+     Examples:
+     - "Public only — I can't afford US private tuition."
+     - "Private OK if scholarship covers 70%+."
+     - "Either, no preference."
+     Edit your stance below. -->
+
+**Default (from `config/profile.yml.target.institution_type`):** values are `public`, `private`, or `any`.
+
+**Edge cases:**
+- "Semi-private" / "foundation universities" (e.g., German Stiftungsuniversitäten, Turkish vakif universities): treat as public for fee purposes if subsidies apply, else private.
+- US state schools out-of-state tuition: treated as public for institution type but Block D budget math still uses the high out-of-state tuition figure.
+- Always cross-check `funding_bundled` in `programs.yml` — a private school with a full assistantship beats a public school with no funding for affordability.
+
+## Your Ranking Policy
+
+<!-- Rankings are noisy but admissions committees and future employers use them.
+     Examples:
+     - "QS Subject top 50 only."
+     - "QS Subject top 200; willing to go lower if the lab is world-class for my niche."
+     - "Don't filter by ranking at all — fit > brand."
+     Edit your stance below. -->
+
+**Default (from `config/profile.yml.target.ranking_source` + `ranking_max`):** filter by the specified ranking source + threshold.
+
+**Recommended `ranking_source` values:**
+- `QS Subject` → best for finding "top CS program at otherwise mid-ranked university"
+- `QS World` → for overall prestige
+- `THE` → Times Higher Education subject ranking
+- `ARWU` → Shanghai (research-output-weighted; favors PhD applicants)
+
+**Edge cases:**
+- Lab > rank: if a niche lab (e.g., a specific PI's group) is world-leading, Block C can override low ranking. Note this in `_profile.md`.
+- Unranked but known-good (smaller universities, regional specialists): treat as `rank = 9999`; do NOT drop with `ranking_strict: true` unless the user is firm.
+- US universities not in QS Subject: fall back to `QS World` or US News Best Graduate Schools — note the source switch in Block A.
+
+## Your Thesis Policy
+
+<!-- Thesis-required programs deliver depth + publication potential.
+     Coursework-only programs are faster + safer for industry-bound students.
+     Examples:
+     - "Thesis required — I want PhD afterwards and need a publication."
+     - "Optional thesis is fine — I'll do it if the topic is right."
+     - "No thesis, I want industry placement support instead."
+     Edit your stance below. -->
+
+**Default (from `config/profile.yml.target.thesis`):** values are `required`, `optional`, `no_thesis`, `either`.
+
+**Match rules (mirror `_shared.md` + scan.md):**
+- User `required` → program must have `required` or `optional`. Drop pure-coursework.
+- User `optional` → program must have `optional` or `required`. Drop `no_thesis`.
+- User `no_thesis` → drop `required`.
+- User `either` → no filter.
+
+**Edge cases:**
+- "Capstone project" can substitute for thesis in some MEng programs — treat as thesis-optional.
+- "Industry thesis with company" (German Studienarbeit): treat as `required`.
+- PhD programs are implicitly thesis-required — skip filter for PhD targets unless user explicitly wants research-by-coursework variants.
+
+## Your Intake Season Policy
+
+<!-- Most programs admit only Fall. Some have Spring intake.
+     Examples:
+     - "Only Fall — I want to start September 2027."
+     - "Fall or Spring — I'm flexible on start term."
+     - "Spring only — I need 6 more months to retake GRE."
+     Edit your stance below. -->
+
+**Default (from `config/profile.yml.target.intake_seasons`):** empty list = accept any intake. Non-empty list = filter to those seasons.
+
+**Edge cases:**
+- "Rolling admissions": treat as accepting all intakes; do not filter out.
+- Programs with separate Fall + Spring deadlines (e.g., ETH MSc): list both seasons; the scanner will accept either.
+- Intake season is rarely a hard blocker — keep `intake_strict: false` unless start-term is non-negotiable for visa/funding reasons.
+
 ## Your Duration Preference
 
 <!-- Most candidates have strong opinions on program length. Examples:

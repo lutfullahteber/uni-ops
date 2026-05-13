@@ -86,6 +86,10 @@ tracked_programs:
     funding_bundled: false
     application_fee: 75
     duration_years: 2
+    institution_type: "public"
+    ranking: { source: "QS Subject CS", rank: 30 }
+    thesis: "required"               # required | optional | no_thesis
+    intake_seasons: ["Fall"]
     required_test_scores:
       toefl_ibt_min: 88
       ielts_min: 6.5
@@ -103,6 +107,10 @@ tracked_programs:
     est_living_cost_per_year: 11000
     currency: "EUR"
     duration_years: 2
+    institution_type: "public"
+    ranking: { source: "QS Subject CS", rank: 90 }
+    thesis: "required"
+    intake_seasons: ["Fall"]
     notes: "Strong AI / vision groups."
     enabled: true
 
@@ -118,6 +126,10 @@ tracked_programs:
     currency: "CHF"
     application_fee: 150
     duration_years: 2
+    institution_type: "public"
+    ranking: { source: "QS Subject CS", rank: 10 }
+    thesis: "required"
+    intake_seasons: ["Fall"]
     required_test_scores:
       toefl_ibt_min: 100
     notes: "Top global CS. Highly selective."
@@ -133,6 +145,10 @@ tracked_programs:
     est_living_cost_per_year: 22000
     currency: "CHF"
     duration_years: 2
+    institution_type: "public"
+    ranking: { source: "QS Subject CS", rank: 22 }
+    thesis: "required"
+    intake_seasons: ["Fall", "Spring"]
     enabled: true
 
   # -- Netherlands --
@@ -146,6 +162,10 @@ tracked_programs:
     est_living_cost_per_year: 14000
     currency: "EUR"
     duration_years: 2
+    institution_type: "public"
+    ranking: { source: "QS Subject CS", rank: 40 }
+    thesis: "required"
+    intake_seasons: ["Fall"]
     enabled: true
 
   # -- Japan --
@@ -159,5 +179,9 @@ tracked_programs:
     est_living_cost_per_year: 1500000  # JPY (~9700 EUR)
     currency: "JPY"
     duration_years: 2
+    institution_type: "public"
+    ranking: { source: "QS Subject CS", rank: 28 }
+    thesis: "required"
+    intake_seasons: ["Fall", "Spring"]
     notes: "MEXT scholarship eligible. Apply via embassy track for funding."
     enabled: true
