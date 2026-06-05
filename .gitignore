@@ -1,12 +1,30 @@
-# Personal data (user fills these)
+# Personal data (user fills these — never commit)
 cv.md
+academic-record.md
+extracurriculars.md
+article-digest.md
+programs.yml
+scholarships.yml
+recommenders.yml
 data/applications.md
 data/pipeline.md
 data/scan-history.tsv
+data/scholarships.md
+data/recommenders.md
+data/follow-ups.md
+!data/.gitkeep
+interview-prep/story-bank.md
+!interview-prep/.gitkeep
 reports/*.md
 !reports/.gitkeep
 output/*
 !output/.gitkeep
+
+# Personal images / scans (transcripts, photos, ID docs)
+*.jpg
+*.jpeg
+*.heic
+*.webp
 batch/logs/*
 !batch/logs/.gitkeep
 batch/batch-state.tsv

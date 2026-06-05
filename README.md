@@ -1,331 +1,181 @@
 # Uni-Ops
 
-[English](README.md) | [Español](README.es.md) | [Português (Brasil)](README.pt-BR.md) | [한국어](README.ko-KR.md) | [日本語](README.ja.md) | [Русский](README.ru.md) | [简体中文](README.cn.md) | [繁體中文](README.zh-TW.md)
-
-<p align="center">
-  <a href="https://x.com/santifer"><img src="docs/hero-banner.jpg" alt="Uni-Ops — Multi-Agent Job Search System" width="800"></a>
-</p>
-
-<p align="center">
-  <em>I spent months applying to jobs the hard way. So I engineered the system I wish I had.</em><br>
-  Companies use AI to filter candidates. <strong>I just gave candidates AI to <em>choose</em> companies.</strong><br>
-  <em>Now it's open source.</em>
-</p>
+**AI University & Scholarship Application Pipeline.** Turns any AI coding CLI into a command center for graduate/undergraduate admissions — evaluate programs, draft Statements of Purpose, manage recommenders, track funding, and keep every deadline in one source of truth.
 
 <p align="center">
   <img src="https://img.shields.io/badge/Claude_Code-000?style=flat&logo=anthropic&logoColor=white" alt="Claude Code">
-  <img src="https://img.shields.io/badge/OpenCode-111827?style=flat&logo=terminal&logoColor=white" alt="OpenCode">
   <img src="https://img.shields.io/badge/Gemini_CLI-4285F4?style=flat&logo=google&logoColor=white" alt="Gemini CLI">
-  <img src="https://img.shields.io/badge/Codex_(soon)-6B7280?style=flat&logo=openai&logoColor=white" alt="Codex">
   <img src="https://img.shields.io/badge/Node.js-339933?style=flat&logo=node.js&logoColor=white" alt="Node.js">
-  <img src="https://img.shields.io/badge/Go-00ADD8?style=flat&logo=go&logoColor=white" alt="Go">
   <img src="https://img.shields.io/badge/Playwright-2EAD33?style=flat&logo=playwright&logoColor=white" alt="Playwright">
   <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT">
-  <a href="TRADEMARK.md"><img src="https://img.shields.io/badge/Trademark-Policy-blue.svg" alt="Trademark Policy"></a>
-  <a href="https://discord.gg/8pRpHETxa4"><img src="https://img.shields.io/badge/Discord-5865F2?style=flat&logo=discord&logoColor=white" alt="Discord"></a>
-  <br>
-  <img src="https://img.shields.io/badge/EN-blue?style=flat" alt="EN">
-  <img src="https://img.shields.io/badge/ES-red?style=flat" alt="ES">
-  <img src="https://img.shields.io/badge/DE-grey?style=flat" alt="DE">
-  <img src="https://img.shields.io/badge/FR-blue?style=flat" alt="FR">
-  <img src="https://img.shields.io/badge/PT--BR-green?style=flat" alt="PT-BR">
-  <img src="https://img.shields.io/badge/KO-white?style=flat" alt="KO">
-  <img src="https://img.shields.io/badge/JA-red?style=flat" alt="JA">
-  <img src="https://img.shields.io/badge/ZH--CN-red?style=flat" alt="ZH-CN">
-  <img src="https://img.shields.io/badge/ZH--TW-blue?style=flat" alt="ZH-TW">
+  <img src="https://img.shields.io/badge/version-0.1.0-blue.svg" alt="v0.1.0">
 </p>
 
 ---
 
-<p align="center">
-  <img src="docs/demo.gif" alt="Uni-Ops Demo" width="800">
-</p>
-
-<p align="center"><strong>740+ job listings evaluated · 100+ personalized CVs · 1 dream role landed</strong></p>
-
-<p align="center"><a href="https://discord.gg/8pRpHETxa4"><img src="https://img.shields.io/badge/Join_the_community-Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord"></a></p>
-
 ## What Is This
 
-Uni-Ops turns any AI coding CLI into a full job search command center. Instead of manually tracking applications in a spreadsheet, you get an AI-powered pipeline that:
+Applying to universities and scholarships is a tracking nightmare: dozens of programs, each with its own deadline, tuition, language requirement, and document checklist — plus recommenders to chase and a Statement of Purpose to tailor for every one.
 
-- **Evaluates offers** with a structured A-F scoring system (10 weighted dimensions)
-- **Generates tailored PDFs** -- ATS-optimized CVs customized per job description
-- **Scans portals** automatically (Greenhouse, Ashby, Lever, company pages)
-- **Processes in batch** -- evaluate 10+ offers in parallel with sub-agents
-- **Tracks everything** in a single source of truth with integrity checks
+Uni-ops is an AI-powered pipeline that:
 
-> **Important: This is NOT a spray-and-pray tool.** Uni-ops is a filter -- it helps you find the few offers worth your time out of hundreds. The system strongly recommends against applying to anything scoring below 4.0/5. Your time is valuable, and so is the recruiter's. Always review before submitting.
+- **Evaluates programs** with a structured A–F + G scoring rubric (fit, funding, research match, admission odds, logistics)
+- **Computes real net cost** — tuition + living − scholarship coverage vs your budget cap (Block D math)
+- **Drafts Statements of Purpose** tailored to each program from your academic record and research story
+- **Manages recommenders** — outreach drafts, talking points, and follow-up cadence
+- **Tracks everything** — programs, scholarships, and referees in a single source of truth with integrity checks
+- **Generates PDFs** — academic CV and SoP from HTML templates
 
-Uni-ops is agentic: Claude Code navigates career pages with Playwright, evaluates fit by reasoning about your CV vs the job description (not keyword matching), and adapts your resume per listing.
+> **This is a filter, not a spray-and-pray tool.** It helps you find the few programs worth a real application out of many. The system recommends *against* applying when the fit score drops below 3.5/5. Every SoP an admissions officer reads costs attention — only submit what's worth reading.
 
-> **Heads up: the first evaluations won't be great.** The system doesn't know you yet. Feed it context -- your CV, your career story, your proof points, your preferences, what you're good at, what you want to avoid. The more you nurture it, the better it gets. Think of it as onboarding a new recruiter: the first week they need to learn about you, then they become invaluable.
+> **Human-in-the-loop, always.** Uni-ops drafts, evaluates, and pre-fills — but it **never submits an application or sends an email**. You review and click the final button.
 
-Built by someone who used it to evaluate 740+ job offers, generate 100+ tailored CVs, and land a Head of Applied AI role. [Read the full case study](https://santifer.io/uni-ops-system).
+> **The first evaluations won't be great.** The system doesn't know you yet. Feed it context — your CV, transcript, research interest, proof points, deal-breakers. The more you nurture it, the sharper the filtering gets.
 
 ## Features
 
-| Feature | Description |
+| Feature | What it does |
 |---------|-------------|
-| **Auto-Pipeline** | Paste a URL, get a full evaluation + PDF + tracker entry |
-| **6-Block Evaluation** | Role summary, CV match, level strategy, comp research, personalization, interview prep (STAR+R) |
-| **Interview Story Bank** | Accumulates STAR+Reflection stories across evaluations -- 5-10 master stories that answer any behavioral question |
-| **Negotiation Scripts** | Salary negotiation frameworks, geographic discount pushback, competing offer leverage |
-| **ATS PDF Generation** | Keyword-injected CVs with Space Grotesk + DM Sans design |
-| **Portal Scanner** | 45+ companies pre-configured (Anthropic, OpenAI, ElevenLabs, Retool, n8n...) + custom queries across Ashby, Greenhouse, Lever, Wellfound |
-| **Batch Processing** | Parallel evaluation with `claude -p` workers |
-| **Dashboard TUI** | Terminal UI to browse, filter, and sort your pipeline |
-| **Human-in-the-Loop** | AI evaluates and recommends, you decide and act. The system never submits an application -- you always have the final call |
+| **Auto-Pipeline** | Paste a program URL → evaluation + SoP draft + tracker entry + recommender prep |
+| **A–F + G Scoring** | Structured rubric across fit, research match, funding, admission odds, logistics |
+| **Budget Math (Block D)** | `Tuition + Living − Coverage = Net (vs cap) → score` for every program |
+| **SoP Drafter** | Statement of Purpose tailored per program from your record and narrative |
+| **Recommender Management** | Outreach drafts, per-referee talking points, follow-up cadence |
+| **Program Scanner** | Discover programs matching your fields, countries, and filters |
+| **Scholarship Tracking** | Coverage amounts, eligibility, deadlines feed the budget math |
+| **Interview Prep** | Accumulating STAR+R story bank for admission/scholarship interviews |
+| **Live Verification** | Playwright confirms a program is actually accepting applications (not a stale page) |
 | **Pipeline Integrity** | Automated merge, dedup, status normalization, health checks |
 
 ## Quick Start
 
 ```bash
 # 1. Clone and install
-git clone https://github.com/santifer/uni-ops.git
+git clone <your-repo-url> uni-ops
 cd uni-ops && npm install
-npx playwright install chromium   # Required for PDF generation
+npx playwright install chromium      # for PDF generation + program verification
 
 # 2. Check setup
-npm run doctor                     # Validates all prerequisites
+npm run doctor                       # validates prerequisites
 
-# 3. Configure
-cp config/profile.example.yml config/profile.yml  # Edit with your details
-cp templates/portals.example.yml portals.yml       # Customize companies
+# 3. Configure your profile
+cp config/profile.example.yml config/profile.yml      # identity, targets, funding budget
+cp templates/programs.example.yml programs.yml        # programs to track
+cp templates/recommenders.example.yml recommenders.yml
 
-# 4. Add your CV
-# Create cv.md in the project root with your CV in markdown
+# 4. Add your academic data (these are gitignored — your data stays local)
+#    cv.md                 — academic CV in markdown
+#    academic-record.md    — per-semester GPA, grades, test scores
+#    extracurriculars.md   — leadership, awards, languages
 
-# 5. Personalize with Claude
-claude   # Open Claude Code in this directory
-
-# Then ask Claude to adapt the system to you:
-# "Change the archetypes to backend engineering roles"
-# "Translate the modes to English"
-# "Add these 5 companies to portals.yml"
-# "Update my profile with this CV I'm pasting"
-
-# 6. Start using
-# Paste a job URL or run /uni-ops
+# 5. Open your CLI in this directory and let it onboard you
+claude        # or: gemini
 ```
 
-> **The system is designed to be customized by Claude itself.** Modes, archetypes, scoring weights, negotiation scripts -- just ask Claude to change them. It reads the same files it uses, so it knows exactly what to edit.
+On first run the agent checks whether your core files are filled in and walks you through onboarding (CV → academic record → profile → programs → recommenders) before running any evaluation.
 
-See [docs/SETUP.md](docs/SETUP.md) for the full setup guide.
-
-## Gemini CLI Integration
-
-Uni-ops supports [Gemini CLI](https://github.com/google-gemini/gemini-cli) natively — the same way it supports Claude Code and OpenCode. All 15 slash commands are available, using the same `modes/*.md` evaluation logic.
-
-### Option A — Native Gemini CLI (Recommended)
-
-```bash
-# 1. Install Gemini CLI
-npm install -g @google/gemini-cli
-# or: npx @google/gemini-cli --version
-
-# 2. Authenticate (free — uses your Google account)
-gemini auth
-
-# 3. Run in the uni-ops directory
-cd uni-ops
-gemini
-
-# 4. Use slash commands just like Claude Code
-/uni-ops "Senior AI Engineer at Anthropic..."
-/uni-ops-evaluate --file ./jds/openai.txt
-/uni-ops-scan
-/uni-ops-pdf
-/uni-ops-tracker
-```
-
-The `GEMINI.md` file is auto-loaded as context. All 15 commands are defined in `.gemini/commands/*.toml`.
-
-### Option B — Standalone API Script (No CLI install needed)
-
-```bash
-# 1. Get a free API key at https://aistudio.google.com/apikey
-cp .env.example .env
-# Edit .env → set GEMINI_API_KEY=your_key_here
-
-# 2. Install dependencies
-npm install
-
-# 3. Evaluate a job description
-node gemini-eval.mjs "We are looking for a Senior AI Engineer..."
-node gemini-eval.mjs --file ./jds/my-job.txt
-npm run gemini:eval -- "JD text here"
-```
-
-> **Free tier:** Both options work without billing. Native CLI uses Google OAuth; the API script uses `gemini-2.0-flash` (15 RPM, 1M tokens/day free).
+> **Built to be made yours.** Archetypes, scoring weights, SoP defaults, funding strategy — just ask the agent to change them. It reads the same files it edits, so it knows exactly what to touch. Customizations go in `config/profile.yml` and `modes/_profile.md`, which system updates never overwrite.
 
 ## Usage
 
-Uni-ops is a single slash command with multiple modes:
+Single slash command, multiple modes:
 
 ```
-/uni-ops                → Show all available commands
-/uni-ops {paste a JD}   → Full auto-pipeline (evaluate + PDF + tracker)
-/uni-ops scan           → Scan portals for new offers
-/uni-ops pdf            → Generate ATS-optimized CV
-/uni-ops batch          → Batch evaluate multiple offers
-/uni-ops tracker        → View application status
-/uni-ops apply          → Fill application forms with AI
-/uni-ops pipeline       → Process pending URLs
-/uni-ops contacto       → LinkedIn outreach message
-/uni-ops deep           → Deep company research
-/uni-ops training       → Evaluate a course/cert
-/uni-ops project        → Evaluate a portfolio project
+/uni-ops                  → show all commands
+/uni-ops {program URL}    → full auto-pipeline (evaluate + SoP + tracker + recommender prep)
+/uni-ops scan             → discover new programs
+/uni-ops sop              → draft a Statement of Purpose
+/uni-ops recommenders     → recommender outreach + cadence
+/uni-ops programs         → compare tracked programs
+/uni-ops contacto         → outreach to PIs, admissions, current students
+/uni-ops deep             → deep university / lab research
+/uni-ops apply            → application-form assistant
+/uni-ops interview-prep   → admission / scholarship interview prep
+/uni-ops tracker          → application status overview
+/uni-ops pdf              → generate CV / SoP PDF
 ```
 
-Or just paste a job URL or description directly -- uni-ops auto-detects it and runs the full pipeline.
+Or paste a program URL directly — uni-ops auto-detects and runs the full pipeline.
+
+### Gemini CLI
+
+Same modes work under [Gemini CLI](https://github.com/google-gemini/gemini-cli). Or use the standalone API script:
+
+```bash
+cp .env.example .env                 # set GEMINI_API_KEY
+node gemini-eval.mjs --file ./jds/program.txt
+```
 
 ## How It Works
 
 ```
-You paste a job URL or description
+You paste a program URL or description
         │
         ▼
 ┌──────────────────┐
-│  Archetype       │  Classifies: LLMOps / Agentic / PM / SA / FDE / Transformation
-│  Detection       │
+│  Verification    │  Playwright confirms program is live & accepting
 └────────┬─────────┘
          │
 ┌────────▼─────────┐
-│  A-F Evaluation  │  Match, gaps, comp research, STAR stories
-│  (reads cv.md)   │
+│  A–F + G Eval    │  Fit, research match, admission odds, logistics
+│  (reads cv.md +  │  + Block D budget: Tuition+Living−Coverage=Net vs cap
+│  academic-record)│
 └────────┬─────────┘
          │
-    ┌────┼────┐
-    ▼    ▼    ▼
- Report  PDF  Tracker
-  .md   .pdf   .tsv
+    ┌────┼────────┬──────────┐
+    ▼    ▼        ▼          ▼
+ Report  SoP   Tracker   Recommender
+  .md    draft   row        prep
 ```
-
-## Pre-configured Portals
-
-The scanner comes with **45+ companies** ready to scan and **19 search queries** across major job boards. Copy `templates/portals.example.yml` to `portals.yml` and add your own:
-
-**AI Labs:** Anthropic, OpenAI, Mistral, Cohere, LangChain, Pinecone
-**Voice AI:** ElevenLabs, PolyAI, Parloa, Hume AI, Deepgram, Vapi, Bland AI
-**AI Platforms:** Retool, Airtable, Vercel, Temporal, Glean, Arize AI
-**Contact Center:** Ada, LivePerson, Sierra, Decagon, Talkdesk, Genesys
-**Enterprise:** Salesforce, Twilio, Gong, Dialpad
-**LLMOps:** Langfuse, Weights & Biases, Lindy, Cognigy, Speechmatics
-**Automation:** n8n, Zapier, Make.com
-**European:** Factorial, Attio, Tinybird, Clarity AI, Travelperk
-
-**Job boards searched:** Ashby, Greenhouse, Lever, Wellfound, Workable, RemoteFront
-
-## Dashboard TUI
-
-The built-in terminal dashboard lets you browse your pipeline visually:
-
-```bash
-cd dashboard
-go build -o career-dashboard .
-./career-dashboard --path ..
-```
-
-Features: 6 filter tabs, 4 sort modes, grouped/flat view, lazy-loaded previews, inline status changes.
 
 ## Project Structure
 
 ```
 uni-ops/
-├── AGENTS.md                    # Canonical agent instructions (all CLIs)
-├── CLAUDE.md                    # Claude Code wrapper (imports AGENTS.md)
-├── cv.md                        # Your CV (create this)
-├── article-digest.md            # Your proof points (optional)
+├── AGENTS.md / CLAUDE.md       # agent instructions (all CLIs)
+├── DATA_CONTRACT.md            # user-layer vs system-layer file rules
+├── cv.md                       # your academic CV            (gitignored)
+├── academic-record.md          # GPA / grades / test scores  (gitignored)
+├── extracurriculars.md         # leadership / awards         (gitignored)
+├── programs.yml                # tracked programs            (gitignored)
+├── scholarships.yml            # tracked scholarships        (gitignored)
+├── recommenders.yml            # referee list                (gitignored)
 ├── config/
-│   └── profile.example.yml      # Template for your profile
-├── modes/                       # 14 skill modes
-│   ├── _shared.md               # Shared context (customize this)
-│   ├── oferta.md                # Single evaluation
-│   ├── pdf.md                   # PDF generation
-│   ├── scan.md                  # Portal scanner
-│   ├── batch.md                 # Batch processing
-│   └── ...
-├── templates/
-│   ├── cv-template.html         # ATS-optimized CV template
-│   ├── portals.example.yml      # Scanner config template
-│   └── states.yml               # Canonical statuses
-├── batch/
-│   ├── batch-prompt.md          # Self-contained worker prompt
-│   └── batch-runner.sh          # Orchestrator script
-├── dashboard/                   # Go TUI pipeline viewer
-├── data/                        # Your tracking data (gitignored)
-├── reports/                     # Evaluation reports (gitignored)
-├── output/                      # Generated PDFs (gitignored)
-├── fonts/                       # Space Grotesk + DM Sans
-├── docs/                        # Setup, customization, architecture
-└── examples/                    # Sample CV, report, proof points
+│   └── profile.example.yml     # identity, targets, budget (copy → profile.yml)
+├── modes/                      # evaluation logic per command
+│   ├── _shared.md              # scoring rubric (A–F+G), budget math, archetypes
+│   ├── _profile.md             # your customizations (gitignored)
+│   ├── program.md / sop.md / recommenders.md / scan.md / ...
+├── templates/                  # CV + SoP HTML, example YAML, canonical states
+├── data/                       # trackers (gitignored)
+├── reports/                    # evaluation reports (gitignored)
+├── output/                     # generated PDFs (gitignored)
+├── fonts/                      # self-hosted fonts for PDF
+└── *.mjs                       # scan, doctor, merge, generate-pdf, verify...
 ```
+
+## Data Privacy
+
+Your personal data **never leaves your machine** except to the AI provider you choose. The `.gitignore` excludes every user-layer file — CV, academic record, transcripts, programs, scholarships, recommenders, generated reports and PDFs, and image scans (`*.jpg`, etc.). See [DATA_CONTRACT.md](DATA_CONTRACT.md) for the full user-layer vs system-layer split.
 
 ## Tech Stack
 
-![Claude Code](https://img.shields.io/badge/Claude_Code-000?style=flat&logo=anthropic&logoColor=white)
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=node.js&logoColor=white)
-![Playwright](https://img.shields.io/badge/Playwright-2EAD33?style=flat&logo=playwright&logoColor=white)
-![Go](https://img.shields.io/badge/Go-00ADD8?style=flat&logo=go&logoColor=white)
-![Bubble Tea](https://img.shields.io/badge/Bubble_Tea-FF75B5?style=flat&logo=go&logoColor=white)
-
-- **Agent**: Claude Code with custom skills and modes
-- **PDF**: Playwright/Puppeteer + HTML template
-- **Scanner**: Playwright + Greenhouse API + WebSearch
-- **Dashboard**: Go + Bubble Tea + Lipgloss (Catppuccin Mocha theme)
+- **Agent**: any AI coding CLI following the open agent-skill standard (Claude Code, Gemini CLI, Codex, OpenCode, Qwen)
+- **Verification & PDF**: Playwright (Chromium)
 - **Data**: Markdown tables + YAML config + TSV batch files
+- **Scripts**: Node.js (ESM `.mjs`)
 
-## Also Open Source
+## Credits
 
-- **[cv-santiago](https://github.com/santifer/cv-santiago)** -- The portfolio website (santifer.io) with AI chatbot, LLMOps dashboard, and case studies. If you need a portfolio to showcase alongside your job search, fork it and make it yours.
+Uni-ops is an architectural derivative of [career-ops](https://github.com/santifer/career-ops) by Santiago Fernández de Valderrama (MIT-licensed), retargeted from job search to university and scholarship applications. The mode-router pattern, TSV-tracker merge contract, and PDF pipeline come from career-ops; the academic domain logic (program scoring, SoP drafting, recommender management, funding math) is uni-ops-specific. See [NOTICE.md](NOTICE.md).
 
-## About the Author
+## Ethical Use
 
-I'm Santiago -- Head of Applied AI, former founder (built and sold a business that still runs with my name on it). I built uni-ops to manage my own job search. It worked: I used it to land my current role.
+- Never submit an application or send an email without reviewing it first.
+- This system optimizes for quality, not quantity. Don't spam admissions offices.
+- Recommenders are real people — outreach is draft-only; you send it.
+- Never fabricate GPA, test scores, grades, or publications. The agent reads them from your files at evaluation time.
 
-My portfolio and other open source projects → [santifer.io](https://santifer.io)
+## License
 
-## Star History
-
-<a href="https://www.star-history.com/?repos=santifer%2Funi-ops&type=timeline&legend=top-left">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=santifer/uni-ops&type=timeline&theme=dark&legend=top-left" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=santifer/uni-ops&type=timeline&legend=top-left" />
-   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=santifer/uni-ops&type=timeline&legend=top-left" />
- </picture>
-</a>
-
-## Disclaimer
-
-**uni-ops is a local, open-source tool — NOT a hosted service.** By using this software, you acknowledge:
-
-1. **You control your data.** Your CV, contact info, and personal data stay on your machine and are sent directly to the AI provider you choose (Anthropic, OpenAI, etc.). We do not collect, store, or have access to any of your data.
-2. **You control the AI.** The default prompts instruct the AI not to auto-submit applications, but AI models can behave unpredictably. If you modify the prompts or use different models, you do so at your own risk. **Always review AI-generated content for accuracy before submitting.**
-3. **You comply with third-party ToS.** You must use this tool in accordance with the Terms of Service of the career portals you interact with (Greenhouse, Lever, Workday, LinkedIn, etc.). Do not use this tool to spam employers or overwhelm ATS systems.
-4. **No guarantees.** Evaluations are recommendations, not truth. AI models may hallucinate skills or experience. The authors are not liable for employment outcomes, rejected applications, account restrictions, or any other consequences.
-
-See [LEGAL_DISCLAIMER.md](LEGAL_DISCLAIMER.md) for full details. This software is provided under the [MIT License](LICENSE) "as is", without warranty of any kind.
-
-## Contributors
-
-<a href="https://github.com/santifer/uni-ops/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=santifer/uni-ops" />
-</a>
-
-Got hired using uni-ops? [Share your story!](https://github.com/santifer/uni-ops/issues/new?template=i-got-hired.yml)
-
-## License & Trademark
-
-The code is licensed under [MIT](LICENSE). The "uni-ops" name and
-brand are governed by the [Trademark Policy](TRADEMARK.md) — permissive
-for community use, reserved for commercial product naming and
-endorsement.
-
-## Let's Connect
-
-[![Website](https://img.shields.io/badge/santifer.io-000?style=for-the-badge&logo=safari&logoColor=white)](https://santifer.io)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/santifer)
-[![X](https://img.shields.io/badge/X-000?style=for-the-badge&logo=x&logoColor=white)](https://x.com/santifer)
-[![Discord](https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/8pRpHETxa4)
-[![Email](https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:hi@santifer.io)
+[MIT](LICENSE). The "uni-ops" name and brand are governed by the [Trademark Policy](TRADEMARK.md). See [LEGAL_DISCLAIMER.md](LEGAL_DISCLAIMER.md) for the full disclaimer — this software is provided "as is", without warranty of any kind.
