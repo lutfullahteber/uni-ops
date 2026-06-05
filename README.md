@@ -178,4 +178,4 @@ Uni-ops is an architectural derivative of [career-ops](https://github.com/santif
 
 ## License
 
-[MIT](LICENSE). The "uni-ops" name and brand are governed by the [Trademark Policy](TRADEMARK.md). See [LEGAL_DISCLAIMER.md](LEGAL_DISCLAIMER.md) for the full disclaimer — this software is provided "as is", without warranty of any kind.
+[MIT](LICENSE). See [LEGAL_DISCLAIMER.md](LEGAL_DISCLAIMER.md) for the full disclaimer — this software is provided "as is", without warranty of any kind.
